@@ -200,7 +200,11 @@ class contentLogin extends HTMLPage
                      * @param string $username
                      *  The username of the Author who attempted to login.
                      */
-                    Symphony::ExtensionManager()->notifyMembers('AuthorLoginFailure', '/login/', array('username' => $_POST['username']));
+                    Symphony::ExtensionManager()->notifyMembers(
+                        'AuthorLoginFailure',
+                        '/login/',
+                        ['username' => $_POST['username']]
+                    );
                     $this->failedLoginAttempt = true;
                 } else {
                     /**
@@ -213,7 +217,11 @@ class contentLogin extends HTMLPage
                      * @param string $username
                      *  The username of the Author who logged in.
                      */
-                    Symphony::ExtensionManager()->notifyMembers('AuthorLoginSuccess', '/login/', array('username' => $_POST['username']));
+                    Symphony::ExtensionManager()->notifyMembers(
+                        'AuthorLoginSuccess',
+                        '/login/',
+                        ['username' => $_POST['username']]
+                    );
 
                     isset($_POST['redirect']) ? redirect($_POST['redirect']) : redirect(SYMPHONY_URL . '/');
                 }
@@ -297,9 +305,12 @@ class contentLogin extends HTMLPage
                      * @param integer $author_id
                      *  The ID of the Author who requested the password reset
                      */
-                    Symphony::ExtensionManager()->notifyMembers('AuthorPostPasswordResetSuccess', '/login/', array('author_id' => $author['id']));
+                    Symphony::ExtensionManager()->notifyMembers(
+                        'AuthorPostPasswordResetSuccess',
+                        '/login/',
+                        ['author_id' => $author['id']]
+                    );
                 } else {
-
                     /**
                      * When a password reset has been attempted, but Symphony doesn't
                      * recognise the credentials the user has given.
@@ -311,7 +322,11 @@ class contentLogin extends HTMLPage
                      * @param string $email
                      *  The sanitised Email of the Author who tried to request the password reset
                      */
-                    Symphony::ExtensionManager()->notifyMembers('AuthorPostPasswordResetFailure', '/login/', array('email' => $_POST['email']));
+                    Symphony::ExtensionManager()->notifyMembers(
+                        'AuthorPostPasswordResetFailure',
+                        '/login/',
+                        ['email' => $_POST['email']]
+                    );
 
                     $this->_email_sent = false;
                 }
